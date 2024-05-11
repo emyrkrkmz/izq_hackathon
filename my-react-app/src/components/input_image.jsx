@@ -1,9 +1,14 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useContext } from 'react';
+import { GlobalContext } from '../context/GlobalState';
+import axios from 'axios';
 
 function ImageDropAndUpload() {
     const [imageFile, setImageFile] = useState(null);
     const [preview, setPreview] = useState('');
     const fileInputRef = useRef(null);
+
+    const {selected} = useContext(GlobalContext);
+
 
     const onDragOver = (event) => {
         event.preventDefault(); // Varsayılan davranışı önle
@@ -41,22 +46,41 @@ function ImageDropAndUpload() {
             return;
         }
 
-        const formData = new FormData();
-        formData.append('image', imageFile);
+        let formData = new FormData();
+        formData.append('file', imageFile);
 
-        try {
-            const response = await fetch('https://your-backend-url.com/upload', {
-                method: 'POST',
-                body: formData,
-            });
-            const result = await response.json();
-            console.log('Sunucu yanıtı:', result);
-            alert('Resim başarıyla yüklendi.');
-        } catch (error) {
-            console.error('Yükleme hatası:', error);
-            alert('Resim yüklenirken bir hata oluştu.');
+        if (selected === "domates"){
+            try {
+                const result = await axios.post("http://127.0.0.1:8000/predict/tomato", formData);
+                console.log('Sunucu yanıtı:', result);
+                alert('Resim başarıyla yüklendi.');
+            } catch (error) {
+                console.error('Yükleme hatası:', error);
+                alert('Resim yüklenirken bir hata oluştu.');
+            }
         }
+        else {
+            try {
+                const result = await axios.post("http://127.0.0.1:8000/predict/patato", formData);
+                console.log('Sunucu yanıtı:', result);
+                alert('Resim başarıyla yüklendi.');
+            } catch (error) {
+                console.error('Yükleme hatası:', error);
+                alert('Resim yüklenirken bir hata oluştu.');
+            }
+        }
+        
+        
+
+        
     };
+
+
+    const t = (selected === "domates" || selected === "patates")
+
+    //Axios funcs
+
+    
 
     return (
         <div style={{ width: '260px', height: '260px', padding: '10px', border: '1px solid #ccc',marginTop:'20px' }}>
@@ -86,7 +110,9 @@ function ImageDropAndUpload() {
                 onChange={onFileChange}
                 style={{ display: 'none' }} 
             />
-            <button onClick={handleSubmit} style={{ 
+            <button onClick={handleSubmit}
+            disabled={!t}
+            style={{ 
             marginTop: '20px',
             width: '100%' ,
             backgroundColor:'black',
@@ -95,6 +121,8 @@ function ImageDropAndUpload() {
             borderRadius:'1rem',
             fontSize:'20px',
             fontWeight:'bold'
+            
+
 
             }}>
                 Gönder

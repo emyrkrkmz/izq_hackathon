@@ -8,7 +8,28 @@
    flex-direction: column;
    align-items: center;
 }
- 
+.temel_demo{
+   max-height: 100%;
+   background-color: #edfaee;
+   padding: 20px;
+   border-top-right-radius: 1.5rem;
+   flex-grow: 12 ;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+.temel_results{
+   max-height: 100%;
+   background-color: #edfaee;
+   padding: 20px;
+   border-top-right-radius: 1.5rem;
+   flex-grow: 12 ;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
 .input_image {
    width: 260px;
    height: 260px;

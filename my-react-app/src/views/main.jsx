@@ -5,7 +5,7 @@ import './main.css';
 import Temel from '../components/temel/temel.jsx';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Results from '../components/results.jsx';
-
+import Demo from '../components/demo.jsx';
 
 function Main() {
   return (
@@ -13,18 +13,24 @@ function Main() {
         <Navbar/>
         <div className="main_body">
           <Routes>
-            <Route path='/' element={
+            <Route path='/tasks' element={
               <>
                 <Sidebar />
                 <Temel />
               </>
             } />
           </Routes>
-
+          <Routes>
+            <Route exact path='/' element={
+              <>
+                <Demo/>
+              </>
+            } />
+          </Routes>
           <Routes>
             <Route path='/results' element={
               <>
-                <Results />
+                <Results/>
               </>
             } />
           </Routes>
