@@ -1,4 +1,5 @@
 from fastapi import FastAPI, File, UploadFile
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 import numpy as np
 
@@ -13,6 +14,20 @@ os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
 
 app = FastAPI()
 
+origins = [
+    "http://localhost",
+    "http://localhost:3000",
+    "http://127.0.0.1:*"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 api_key = "sk-proj-XuKNWEKdiupI5DPVcLRRT3BlbkFJQ2GHFEig8WC0a1dTN2Xc"  # Gerçek API anahtarınızı buraya yerleştirin
 
