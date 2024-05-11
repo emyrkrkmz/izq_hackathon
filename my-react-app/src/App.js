@@ -1,12 +1,14 @@
 import React from 'react';
-import Home from './views/home.jsx'; // Navbar bileşenini import ediyoruz
+import Main from './views/main.jsx'; // Navbar bileşenini import ediyoruz
 
 import './App.css';
 function App() {
   return (
-    <div className="App">
-      <Home/>
-    </div>
+    
+      <div className="App">
+        <Main/>
+      </div>
+
   );
 }
 

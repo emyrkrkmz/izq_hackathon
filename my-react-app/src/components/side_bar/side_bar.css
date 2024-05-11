@@ -4,29 +4,43 @@
   flex-grow: 1;
   border-top-left-radius: 1.5rem;
   border:1px solid black;
-  text-align: center;
+  
 
 }
 
 .section {
   margin: 20px;
-  width: 90%
+  margin-top: 30px;
+  max-width: 90%;
+  
 }
 
 .section h2 {
   font-size: 15px;
   margin-bottom: 10px;
-  color: #333;
-  width: 90%
+  color: #004d40a0;
+  width: 90%;
+  text-align: center;
 }
 
 .section ul {
   font-size: 12px;
   list-style: none;
   padding: 0;
-  width: 90%
+  width: 90%;
+  text-align: center;
 }
-
+.section form{
+  max-width: 100%;
+}
+.section form input{
+  cursor:pointer;
+  max-width: 100%;
+}
+.section form label{
+  text-align: start;
+  max-width: 100%;
+}
 .section ul li {
   padding: 8px 0;
   cursor: pointer;
