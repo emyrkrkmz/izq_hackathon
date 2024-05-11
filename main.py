@@ -6,10 +6,19 @@ from PIL import Image
 from io import BytesIO
 import tensorflow as tf
 
+from ChatGPT_API import OpenAIHelper
+
 import os
 os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
 
 app = FastAPI()
+
+
+api_key = "sk-proj-XuKNWEKdiupI5DPVcLRRT3BlbkFJQ2GHFEig8WC0a1dTN2Xc"  # Gerçek API anahtarınızı buraya yerleştirin
+
+helper = OpenAIHelper(api_key)
+#OPENAI ver == 0.28
+
 
 #MODEL = tf.keras.models.load_model("../ai_hackathon/patato1")
 MODEL_patato = tf.keras.models.load_model('models/patato2.h5', compile=False)
@@ -63,10 +72,24 @@ async def predict_patato(file: UploadFile = File(...)):
     
     predicted_class = CLASS_NAMES_patato[np.argmax(predictions[0])]
     confidence = np.max(predictions[0])
+
+    ans = " "
+    if confidence <= 0.7:
+        ans += "Confidence is not enough to say good or bad surely. "
+
+    if predicted_class == "Healthy":
+        ans += "The plant is looks pretty good :)"
+    else:
+        content = '''Patates için bir tarım danışmanısınız, size gelen veriler ışığında bütün olasılıkları değerlendirmeli ve neyden kaynaklandığını bulmalısınız. ,  bütün olasılıkları maddeler şeklinde çıktı vermelisiniz. Ek olarak hangi durumlarda nasıl ilaçlar kullanılır bunu da yazmalısınız ve onu eklerken Sorun Sebepleri: ve Çözümler: (İlaçların isimleri) olacak şekilde 3 tane madde şekilde sonuç vermelisin..'''
+        prompt = helper.prompt_generator("patates", predicted_class, confidence)
+        result = helper.chat_completion(content, prompt)
+
+        ans += helper.answer(result)
     
     return {
 		'class': predicted_class,
-		'confidence': float(confidence)
+		'confidence': float(confidence),
+        'result': ans
 	}
     
 @app.post("/predict/tomato")
@@ -79,6 +102,21 @@ async def predict_tomato(file: UploadFile = File(...)):
     predicted_class = CLASS_NAMES_tomato[np.argmax(predictions[0])]
     confidence = np.max(predictions[0])
     
+    ans = " "
+    if confidence <= 0.7:
+        ans += "Confidence is not enough to say good or bad surely. "
+    
+    if predicted_class == "Tomato_healthy":
+        ans += "The plant is looks pretty good :)"
+
+    else:
+        content = '''Domates için bir tarım danışmanısınız, size gelen veriler ışığında bütün olasılıkları değerlendirmeli ve neyden kaynaklandığını bulmalısınız. ,  bütün olasılıkları maddeler şeklinde çıktı vermelisiniz. Ek olarak hangi durumlarda nasıl ilaçlar kullanılır bunu da yazmalısınız ve onu eklerken Sorun Sebepleri: ve Çözümler: (İlaçların isimleri) olacak şekilde 3 tane madde şekilde sonuç vermelisin.'''
+        prompt = helper.prompt_generator("domates", predicted_class, confidence)
+        result = helper.chat_completion(content, prompt)
+
+        ans += helper.answer(result)
+
+    
     if predicted_class == "Tomato_healthy":
         disease = "Tomato is healty	"
     else:
@@ -86,6 +124,8 @@ async def predict_tomato(file: UploadFile = File(...)):
 
     return {
 		'class': disease,
-		'confidence': float(confidence)
+		'confidence': float(confidence),
+        'result': ans
+
 	}
     
