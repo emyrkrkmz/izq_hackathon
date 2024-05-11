@@ -5,7 +5,7 @@
 !.vscode/settings.json
 
 __pycache__
-
+.DS_Store
 
 ### VisualStudioCode Patch ###
 # Ignore all local history of files
