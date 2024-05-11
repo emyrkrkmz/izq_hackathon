@@ -1,0 +1,9 @@
+.aside {
+   max-height: 100%; /* Tam ekran yüksekliği */
+   background-color: #ffffff;
+   padding: 20px;
+   border-top-left-radius: 1.5rem;
+   flex-grow: 1 
+ }
+ 
+ 
