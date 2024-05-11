@@ -1,3 +1,11 @@
 .App{
    background-color: #ffffff;
+   height: 100vh;
 }
+html, body {
+   margin: 0;
+   padding: 0;
+   height: 100%; /* html ve body için yüksekliği %100'e ayarlayın */
+   width: 100%;  /* genişliği %100'e ayarlayın */
+   overflow: hidden; /* Gerekirse taşma durumunda kaydırmayı kapatın */
+ }

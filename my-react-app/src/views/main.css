@@ -3,11 +3,8 @@
 }; */
 
 .main_body{
-   
-   height: 481px;
+
    display: flex;
-   
-   
    margin: 10px 10px;
-   margin-bottom:0;
+   height: 100%;
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import './side_bar.css'; 
-import CheckboxExample from '../checks';
+
 function Sidebar() {
   return (
     <div className="sidebar">
