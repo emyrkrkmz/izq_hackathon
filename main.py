@@ -2,6 +2,7 @@ from fastapi import FastAPI, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 import numpy as np
+import pandas as pd
 
 from PIL import Image
 from io import BytesIO
@@ -78,7 +79,7 @@ def read_file_as_image(data) -> np.ndarray:
 
 
 @app.post("/predict/patato")
-async def predict_patato(file: UploadFile = File(...)):
+async def predict_patato(file: UploadFile = File(...), promptt = " "):
     #bytes = await file.read()
     image = read_file_as_image(await file.read())
     img_batch = np.expand_dims(image, 0)
@@ -96,7 +97,7 @@ async def predict_patato(file: UploadFile = File(...)):
         ans += "The plant is looks pretty good :)"
     else:
         content = '''Patates için bir tarım danışmanısınız, size gelen veriler ışığında bütün olasılıkları değerlendirmeli ve neyden kaynaklandığını bulmalısınız. ,  bütün olasılıkları maddeler şeklinde çıktı vermelisiniz. Ek olarak hangi durumlarda nasıl ilaçlar kullanılır bunu da yazmalısınız ve onu eklerken Sorun Sebepleri: ve Çözümler: (İlaçların isimleri) olacak şekilde 3 tane madde şekilde sonuç vermelisin..'''
-        prompt = helper.prompt_generator("patates", predicted_class, confidence)
+        prompt = helper.prompt_generator("patates", predicted_class, confidence, promptt)
         result = helper.chat_completion(content, prompt)
 
         ans += helper.answer(result)
@@ -108,7 +109,7 @@ async def predict_patato(file: UploadFile = File(...)):
 	}
     
 @app.post("/predict/tomato")
-async def predict_tomato(file: UploadFile = File(...)):
+async def predict_tomato(file: UploadFile = File(...), promptt = " "):
     image = read_file_as_image(await file.read())
     img_batch = np.expand_dims(image, 0)
 
@@ -126,7 +127,7 @@ async def predict_tomato(file: UploadFile = File(...)):
 
     else:
         content = '''Domates için bir tarım danışmanısınız, size gelen veriler ışığında bütün olasılıkları değerlendirmeli ve neyden kaynaklandığını bulmalısınız. ,  bütün olasılıkları maddeler şeklinde çıktı vermelisiniz. Ek olarak hangi durumlarda nasıl ilaçlar kullanılır bunu da yazmalısınız ve onu eklerken Sorun Sebepleri: ve Çözümler: (İlaçların isimleri) olacak şekilde 3 tane madde şekilde sonuç vermelisin.'''
-        prompt = helper.prompt_generator("domates", predicted_class, confidence)
+        prompt = helper.prompt_generator("domates", predicted_class, confidence, promptt)
         result = helper.chat_completion(content, prompt)
 
         ans += helper.answer(result)
@@ -144,3 +145,24 @@ async def predict_tomato(file: UploadFile = File(...)):
 
 	}
     
+
+@app.get("/results/waste")
+async def waste_comp():
+    #https://eizin.cevre.gov.tr/Rapor/BelgeArama.aspx ## code=020103: Bitki dokusu atiklari
+    return{
+        ["TUZLA DERİ OSB GERİ DÖNÜŞÜM ANONİM ŞİRKETİ", "İSTANBUL", "Atıktan Türetilmiş Yakıt (ATY) Hazırlama Tesisi"],
+        ["ATIKSA ENTEGRE ATIK YUÖNETİMİ TİCARET LİMİTED ŞİRKETİ BAŞKÖY ŞUBESİ", "İZMİR", "Tehlikesiz Atık Geri Kazanım"],
+        ["KARTALLAR EGE GERİ DÖNÜŞÜM ENERJİ ÜRETİM ANONİM ŞİRKETİ", "ARTVİN",  "Tehlikesiz Atık Geri Kazanım"],
+        ["SAKA AĞAÇ ENDÜSTRİSİ SANAYİ VE TİCARET LİMİTED ŞİRKETİ", "BOLU", "Ömrünü Tamamlamış Lastik Geri Kazanım"],
+        ["KUZEY İSTANBUL ÇEVRE YÖNETİMİ SAN. TİC. A.Ş. ODAYERİ ŞUBESİ", "İZMİR", "Biyobozunur Atık İşleme -Biyometanizasyon"], 
+    }
+
+@app.get("/results/cure")
+async def cure_comp():
+    #https://eizin.cevre.gov.tr/Rapor/BelgeArama.aspx ## code=020103: Bitki dokusu atiklari
+    return{
+        ["Bayer", "Turkiye'deki ilaç sektorunde oncu Alman menseili 161 yillik kuresel sirket"],
+        ["Syngenta", "Turkiyede ilaç ve tohum destegi sunan Isveç menseili inovasyonel sirket"],
+        ["DRT", "Ortulu tarimda profesyonel tarim çozumleri sunan alti kitada hizmet veren yerli sirket"],
+    }
+
