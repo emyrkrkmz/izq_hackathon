@@ -1,14 +1,24 @@
-import React, { useState, useRef, useContext } from 'react';
+import React, { useState, useRef, useContext, useEffect } from 'react';
 import { GlobalContext } from '../context/GlobalState';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
 
 function ImageDropAndUpload() {
     const [imageFile, setImageFile] = useState(null);
     const [preview, setPreview] = useState('');
     const fileInputRef = useRef(null);
+    const {selected,data_isready,data_isready_set} = useContext(GlobalContext);
+    const navigate = useNavigate();
 
-    const {selected} = useContext(GlobalContext);
-
+    useEffect(() => {
+        if (data_isready===1) {
+            navigate('/results');
+            data_isready_set(0)
+        }else {
+            navigate('/tasks');
+        }
+    }, [data_isready, navigate]);
 
     const onDragOver = (event) => {
         event.preventDefault(); // Varsayılan davranışı önle
@@ -52,7 +62,7 @@ function ImageDropAndUpload() {
         if (selected === "domates"){
             try {
                 const result = await axios.post("http://127.0.0.1:8000/predict/tomato", formData);
-                console.log('Sunucu yanıtı:', result);
+                data_isready_set(1);
                 alert('Resim başarıyla yüklendi.');
             } catch (error) {
                 console.error('Yükleme hatası:', error);
@@ -63,22 +73,18 @@ function ImageDropAndUpload() {
             try {
                 const result = await axios.post("http://127.0.0.1:8000/predict/patato", formData);
                 console.log('Sunucu yanıtı:', result);
-                alert('Resim başarıyla yüklendi.');
+                
+                data_isready_set(1);
             } catch (error) {
                 console.error('Yükleme hatası:', error);
                 alert('Resim yüklenirken bir hata oluştu.');
             }
         }
         
-        
-
-        
     };
-
-
     const t = (selected === "domates" || selected === "patates")
 
-    //Axios funcs
+
 
     
 
@@ -110,6 +116,7 @@ function ImageDropAndUpload() {
                 onChange={onFileChange}
                 style={{ display: 'none' }} 
             />
+            <textarea></textarea>
             <button onClick={handleSubmit}
             disabled={!t}
             style={{ 

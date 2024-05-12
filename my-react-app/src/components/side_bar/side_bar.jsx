@@ -13,7 +13,7 @@ function Sidebar() {
                 <h2>Ürünler</h2>
                   <input type='radio' id='domates' name='xd' value="domates" onChange={() => {
                     setSelected("domates");
-                  }}></input>
+                  }} ></input>
                   <label htmlFor="domates">Domates</label>
                   <br></br>
                   <input type='radio' id='patates' name='xd' value="patates" onChange={() => {

@@ -6,6 +6,7 @@ export const GlobalProvider = (props) => {
 
 	const [selected, setSelected] = useState(" ");
 	const [result, setResult] = useState(" ");
+	const [data_isready, data_isready_set] = useState(0);
 
 	return (
 		<GlobalContext.Provider 
@@ -13,7 +14,9 @@ export const GlobalProvider = (props) => {
 				 selected: selected,
 				 setSelected: setSelected,
 				 result:result,
-				 setResult:setResult
+				 setResult:setResult,
+				 data_isready:data_isready,
+				 data_isready_set:data_isready_set
 				 }}>
 			{props.children}
 
