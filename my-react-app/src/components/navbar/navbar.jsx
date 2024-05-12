@@ -8,10 +8,10 @@ function Navbar() {
     <header className="navbar">
       <div className="logo">SUSBEEZ</div>
       <div className="menu">
-        <button className="menu-item active"><Link to='/'>Home</Link></button>
-        <button className="menu-item"><Link to='/tasks'>çalıştır</Link></button>
-        <button className="menu-item"><Link to='/isbirligi'>işbiirliği</Link></button>
-        <button className="menu-item special"><Link to='/'>Donate</Link></button>
+        <Link to='/'><button className="menu-item active">Home</button></Link>
+        <Link to='/tasks'><button className="menu-item">çalıştır</button></Link>
+        <Link to='/isbirligi'><button className="menu-item">işbiirliği</button></Link>
+        <Link to='/results'><button className="menu-item special">En Son</button></Link>
       </div>
     </header>
   );

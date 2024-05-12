@@ -41,3 +41,15 @@
    top: 125px;
    left: 125px;
 }
+
+.res {
+   margin:0 20px;
+   background-color: rgba(92, 95, 91, 0.74);
+   padding: 10px;
+}
+.result_baslik{
+   text-align: center;
+}
+.result_baslik p{
+   font-size: 25px;
+}

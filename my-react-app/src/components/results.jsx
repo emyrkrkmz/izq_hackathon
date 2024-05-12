@@ -3,30 +3,30 @@ import './temel/temel.css';
 import { GlobalContext } from '../context/GlobalState';
 
 function Results() {
-  const { result } = useContext(GlobalContext);
+   const { result } = useContext(GlobalContext);
    console.log(result)
-  // result ya da result['data'] undefined ise bir yedek içerik göster
-  if (!result || !result['data']) {
-    return <div className="temel_results">Yükleniyor veya veri mevcut değil...</div>;
-  }
 
-  console.log(result['data']);  // Konsolda veriyi logla, debug için faydalı
+   const htmlMetin = result.result.split("\n").map((satir, index) => (
+      <React.Fragment key={index}>
+        {satir}
+        <br />
+      </React.Fragment>
+    ));
 
   return (
     <div className='temel_results'>
-      <div className=''>
+      <div className='result_baslik'>
         <h2>SONUÇLAR</h2>
+        <hr></hr>
+        <p>% {(100*(result.confidence-0)).toFixed(2)} ihtimalle {result.class}</p>
+      </div>
+      <div className='res'>
+        <div className=''>
+        <p>{htmlMetin}</p>
+        </div>
       </div>
       <div className=''>
-        <div className=''>
-          {result['data']}  // Veriyi burada göster
-        </div>
-        <div className=''>
-          aab
-        </div>
-      </div>
-      <div className=''>
-        aaa
+        
       </div>
     </div>
   );
