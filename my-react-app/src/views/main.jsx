@@ -50,6 +50,14 @@ function Main() {
               </>
             } />
           </Routes>
+          <Routes>
+            <Route path='/collabration' element={
+              <>
+                <Cure/>
+                <Waste/>
+              </>
+            } />
+          </Routes>
         </div>
       </Router>
   );

@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, {useState, useEffect } from 'react';
 import './temel/temel.css';
 import axios from 'axios';
 
@@ -20,13 +20,26 @@ function Waste() {
 
     return (
         <div className="temel_tablolar">
-            <div className='tablolar'>
+            <table className='tablolar' border="2">
+               <thead>
+               <tr>
+                  <th>#</th>
+                  <th>Firma Adı</th>
+                  <th>Lokasyon</th>
+                  <th>Yaptığı iş</th>
+               </tr>
+               </thead>
+               <tbody>
                 {cures.map((cure, index) => (
-                    <div key={index}>
-                        {cure[1][2]}
-                    </div>
+                    <tr>
+                    <td>{cure[0][0]}</td>
+                    <td>{cure[1][0]}</td>
+                    <td>{cure[1][1]}</td>
+                    <td>{cure[1][2]}</td>
+                </tr>
                 ))}
-            </div>
+                </tbody>
+            </table>
         </div>
     );
 }

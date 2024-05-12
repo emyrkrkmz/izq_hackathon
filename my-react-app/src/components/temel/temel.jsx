@@ -9,7 +9,7 @@ class Main extends Component {
             Lütfen ürün seçip fotoğraf yükleyin,
          </div>
          <ImageUploadForm/>
-
+         
       </div>
    )
   };

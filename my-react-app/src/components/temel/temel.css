@@ -44,8 +44,9 @@
 
 .res {
    margin:0 20px;
-   background-color: rgba(92, 95, 91, 0.74);
+   background-color: rgba(185, 203, 178, 0.74);
    padding: 10px;
+   border-radius: 1rem;
 }
 .result_baslik{
    text-align: center;
@@ -54,9 +55,9 @@
    font-size: 25px;
 }
 
-/* .buttons{
-   
-} */
+.buttons button{
+   width: 200px;
+}
 
 .temel_results button{
    background-color: #0a1211;
@@ -65,4 +66,24 @@
    padding: 1rem 2rem;
    margin: 1rem 2rem;
    cursor:pointer;
+ }
+
+ .temel_tablolar{
+   max-height: 100%;
+   background-color: #edfaee;
+   padding: 20px;
+   border-top-right-radius: 1.5rem;
+   display: flex;
+   flex-grow: 12 ;
+   justify-content: center;
+   padding-top: 20px;
+ }
+
+ .tablolar{
+   border-collapse: collapse;
+   text-align: center;
+ }
+
+ .tablolar tbody tr td {
+   margin:0 10px;
  }

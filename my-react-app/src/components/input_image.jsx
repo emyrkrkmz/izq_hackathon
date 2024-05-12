@@ -32,7 +32,8 @@ function ImageDropAndUpload() {
     };
 
     const onClick = () => {
-        fileInputRef.current.click(); // input elementine tıkla
+        fileInputRef.current.click();
+        
     };
 
     const onFileChange = (event) => {
@@ -59,7 +60,7 @@ function ImageDropAndUpload() {
         let formData = new FormData();
         formData.append('file', imageFile);
         formData.append('text', textData); 
-
+        
         try {
             const url = selected === "domates" ? "http://127.0.0.1:8000/predict/tomato" : "http://127.0.0.1:8000/predict/patato";
             const result = await axios.post(url, formData);
@@ -80,14 +81,14 @@ function ImageDropAndUpload() {
     const t = (selected === "domates" || selected === "patates");
 
     return (
-        <div style={{ width: '260px', height: '260px', padding: '10px', border: '1px solid #ccc', marginTop:'20px' }}>
+        <div style={{padding: '10px', border: '1px solid #ccc', marginTop:'20px' }} >
             <div
                 onClick={onClick}
                 onDragOver={onDragOver}
                 onDrop={onDrop}
                 style={{
-                    width: '100%',
-                    height: '100%',
+                    width: '260px',
+                    height: '260px',
                     border: '2px dashed #aaa',
                     display: 'flex',
                     alignItems: 'center',
@@ -123,7 +124,9 @@ function ImageDropAndUpload() {
                     height: '40px',
                     borderRadius:'1rem',
                     fontSize:'20px',
-                    fontWeight:'bold'
+                    fontWeight:'bold',
+                    cursor:'pointer',
+                    display:'block'
                 }}
             >
                 Gönder

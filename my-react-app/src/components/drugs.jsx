@@ -1,32 +1,43 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, {useState, useEffect } from 'react';
 import './temel/temel.css';
 import axios from 'axios';
 
 function Cure() {
-    const [cures, setCures] = useState([])
+    const [wastes, setwastes] = useState([])
 
     useEffect(() => {
-        const getCures = () => {
+        const getwastes = () => {
             axios.get('http://localhost:8000/cure')
                 .then((response) => {
-                    setCures(Object.entries(response.data))
+                    setwastes(Object.entries(response.data))
                 })
                 .catch(error => {
-                    console.error("Error fetching cures:", error);
+                    console.error("Error fetching wastes:", error);
                 });
         };
-        getCures();
+        getwastes();
     }, []);
 
     return (
         <div className="temel_tablolar">
-            <div className='tablolar'>
-                {cures.map((cure, index) => (
-                    <div key={index}>
-                        {cure[0]}: {cure[1]}
-                    </div>
+            <table className='tablolar' border="1">
+                <thead>
+               <tr>
+                  <th>#</th>
+                  <th>Firma Adı</th>
+                  <th>Yaptığı iş</th>
+               </tr>
+               </thead>
+               <tbody>
+                {wastes.map((waste, index) => (
+                    <tr>
+                    <td>{waste[0][0]}</td>
+                    <td>{waste[1][0]}</td>
+                    <td>{waste[1][1]}</td>
+                </tr>
                 ))}
-            </div>
+                </tbody>
+            </table>
         </div>
     );
 }
