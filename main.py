@@ -2,7 +2,6 @@ from fastapi import FastAPI, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 import numpy as np
-import pandas as pd
 
 from PIL import Image
 from io import BytesIO
@@ -79,7 +78,7 @@ def read_file_as_image(data) -> np.ndarray:
 
 
 @app.post("/predict/patato")
-async def predict_patato(file: UploadFile = File(...), promptt = " "):
+async def predict_patato(file: UploadFile = File(...)):
     #bytes = await file.read()
     image = read_file_as_image(await file.read())
     img_batch = np.expand_dims(image, 0)
@@ -97,7 +96,7 @@ async def predict_patato(file: UploadFile = File(...), promptt = " "):
         ans += "The plant is looks pretty good :)"
     else:
         content = '''Patates için bir tarım danışmanısınız, size gelen veriler ışığında bütün olasılıkları değerlendirmeli ve neyden kaynaklandığını bulmalısınız. ,  bütün olasılıkları maddeler şeklinde çıktı vermelisiniz. Ek olarak hangi durumlarda nasıl ilaçlar kullanılır bunu da yazmalısınız ve onu eklerken Sorun Sebepleri: ve Çözümler: (İlaçların isimleri) olacak şekilde 3 tane madde şekilde sonuç vermelisin..'''
-        prompt = helper.prompt_generator("patates", predicted_class, confidence, promptt)
+        prompt = helper.prompt_generator("patates", predicted_class, confidence)
         result = helper.chat_completion(content, prompt)
 
         ans += helper.answer(result)
@@ -109,7 +108,7 @@ async def predict_patato(file: UploadFile = File(...), promptt = " "):
 	}
     
 @app.post("/predict/tomato")
-async def predict_tomato(file: UploadFile = File(...), promptt = " "):
+async def predict_tomato(file: UploadFile = File(...)):
     image = read_file_as_image(await file.read())
     img_batch = np.expand_dims(image, 0)
 
@@ -127,7 +126,7 @@ async def predict_tomato(file: UploadFile = File(...), promptt = " "):
 
     else:
         content = '''Domates için bir tarım danışmanısınız, size gelen veriler ışığında bütün olasılıkları değerlendirmeli ve neyden kaynaklandığını bulmalısınız. ,  bütün olasılıkları maddeler şeklinde çıktı vermelisiniz. Ek olarak hangi durumlarda nasıl ilaçlar kullanılır bunu da yazmalısınız ve onu eklerken Sorun Sebepleri: ve Çözümler: (İlaçların isimleri) olacak şekilde 3 tane madde şekilde sonuç vermelisin.'''
-        prompt = helper.prompt_generator("domates", predicted_class, confidence, promptt)
+        prompt = helper.prompt_generator("domates", predicted_class, confidence)
         result = helper.chat_completion(content, prompt)
 
         ans += helper.answer(result)
