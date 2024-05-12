@@ -6,6 +6,8 @@ import Temel from '../components/temel/temel.jsx';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Results from '../components/results.jsx';
 import Demo from '../components/demo.jsx';
+import Cure from '../components/drugs.jsx';
+import Waste from '../components/atık.jsx';
 
 function Main() {
   return (
@@ -31,6 +33,20 @@ function Main() {
             <Route path='/results' element={
               <>
                 <Results/>
+              </>
+            } />
+          </Routes>
+          <Routes>
+            <Route path='/cure' element={
+              <>
+                <Cure/>
+              </>
+            } />
+          </Routes>
+          <Routes>
+            <Route path='/waste' element={
+              <>
+                <Waste/>
               </>
             } />
           </Routes>

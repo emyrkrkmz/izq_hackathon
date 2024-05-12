@@ -6,7 +6,7 @@ class Main extends Component {
    return(
       <div className='temel'>
          <div className='başlik'> 
-            xdd
+            Lütfen ürün seçip fotoğraf yükleyin,
          </div>
          <ImageUploadForm/>
 

@@ -53,3 +53,16 @@
 .result_baslik p{
    font-size: 25px;
 }
+
+/* .buttons{
+   
+} */
+
+.temel_results button{
+   background-color: #0a1211;
+   border-radius: 1rem;
+   color: white;
+   padding: 1rem 2rem;
+   margin: 1rem 2rem;
+   cursor:pointer;
+ }
