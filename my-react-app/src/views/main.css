@@ -1,0 +1,10 @@
+/* .home_main{
+
+}; */
+
+.main_body{
+
+   display: flex;
+   margin: 10px 10px;
+   height: 100%;
+}

@@ -1,0 +1,89 @@
+.temel {
+   max-height: 100%;
+   background-color: #edfaee;
+   padding: 20px;
+   border-top-right-radius: 1.5rem;
+   flex-grow: 12 ;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+.temel_demo{
+   max-height: 100%;
+   background-color: #edfaee;
+   padding: 20px;
+   border-top-right-radius: 1.5rem;
+   flex-grow: 12 ;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+.temel_results{
+   max-height: 100%;
+   background-color: #edfaee;
+   padding: 20px;
+   border-top-right-radius: 1.5rem;
+   flex-grow: 12 ;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+.input_image {
+   width: 260px;
+   height: 260px;
+   background-color: gray;
+}
+
+.input_image input{
+   position: relative;
+   top: 125px;
+   left: 125px;
+}
+
+.res {
+   margin:0 20px;
+   background-color: rgba(185, 203, 178, 0.74);
+   padding: 10px;
+   border-radius: 1rem;
+}
+.result_baslik{
+   text-align: center;
+}
+.result_baslik p{
+   font-size: 25px;
+}
+
+.buttons button{
+   width: 200px;
+}
+
+.temel_results button{
+   background-color: #0a1211;
+   border-radius: 1rem;
+   color: white;
+   padding: 1rem 2rem;
+   margin: 1rem 2rem;
+   cursor:pointer;
+ }
+
+ .temel_tablolar{
+   max-height: 100%;
+   background-color: #edfaee;
+   padding: 20px;
+   border-top-right-radius: 1.5rem;
+   display: flex;
+   flex-grow: 12 ;
+   justify-content: center;
+   padding-top: 20px;
+ }
+
+ .tablolar{
+   border-collapse: collapse;
+   text-align: center;
+ }
+
+ .tablolar tbody tr td {
+   margin:0 10px;
+ }
